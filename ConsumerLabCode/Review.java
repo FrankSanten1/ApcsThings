@@ -2,8 +2,8 @@ import java.util.Scanner;
 import java.io.File;
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Random;
-import java.io.*;
+//import java.util.Random;
+//import java.io.*;
 
 /**
  * Class that contains helper methods for the Review Lab
@@ -15,14 +15,14 @@ public class Review {
   private static ArrayList<String> negAdjectives = new ArrayList<String>();
  
   
-  private static final String SPACE = " ";
+  //private static final String SPACE = " ";
   
   public static void main(String[] args) {
-    System.out.println(totalSentiment("/workspace/ApcsThings/ConsumerLabCode/SimpleReview.txt"));
+    //System.out.println(totalSentiment("/workspace/ApcsThings/ConsumerLabCode/SimpleReview.txt"));
     //System.out.println(starRating("/workspace/ApcsThings/ConsumerLabCode/SimpleReview.txt"));
-    System.out.println(totalSentiment("/workspace/ApcsThings/ConsumerLabCode/GoodReview.txt"));
+    //System.out.println(totalSentiment("/workspace/ApcsThings/ConsumerLabCode/GoodReview.txt"));
     //System.out.println(starRating("/workspace/ApcsThings/ConsumerLabCode/GoodReview.txt"));
-    
+    System.out.println(fakeReview("/workspace/ApcsThings/ConsumerLabCode/SimpleReview.txt"));
   }
 
   public static double totalSentiment(String filename) {
@@ -39,21 +39,30 @@ public class Review {
     return totalSentiment;
   }
 
-public static int starRating(String filename) {
-  double sentiment = totalSentiment(filename);
-  if (sentiment < -2) {
-    return 1;
-  } else if (sentiment <-0.5) {
-    return 2;
-  } else if (sentiment < 0.5) {
-    return 3;
-  } else if (sentiment < 2) {
-    return 4;
-  } else {
-    return 5;
+  public static int starRating(String filename) {
+    double sentiment = totalSentiment(filename);
+    if (sentiment < -2) {
+      return 1;
+    } else if (sentiment <-0.5) {
+      return 2;
+    } else if (sentiment < 0.5) {
+      return 3;
+    } else if (sentiment < 2) {
+      return 4;
+    } else {
+      return 5;
+    }
   }
-}
 
+  public static String fakeReview(String filename) {
+    String thingy = textToString(filename) + " ";
+    while (!(thingy.indexOf("*") == -1)) {
+      int indexStar = thingy.indexOf("*");
+      int indexSpc = thingy.substring(indexStar).indexOf(" ") + thingy.substring(0, indexStar).length();
+      thingy = thingy.substring(0, indexStar) + randomAdjective() + thingy.substring(indexSpc);
+    }
+    return thingy;
+  }
 
   static{
     try {
@@ -75,7 +84,7 @@ public static int starRating(String filename) {
       Scanner input = new Scanner(new File("/workspace/ApcsThings/ConsumerLabCode/positiveAdjectives.txt"));
       while(input.hasNextLine()){
         String temp = input.nextLine().trim();
-        System.out.println(temp);
+        //System.out.println(temp);
         posAdjectives.add(temp);
       }
       input.close();
