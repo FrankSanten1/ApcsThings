@@ -1,6 +1,14 @@
+import java.util.ArrayList;
+
 class test {
     public static void main(String[] args) {
-        int[] funky = {1, 2, 3, 4};
-        System.out.println(funky[-1]);
+        ArrayList<Integer> e = new ArrayList<Integer>();
+        e.add(1);
+        e.add(3);
+        e.add(2);
+        for (int x : e) {
+            System.out.println(x);
+        }
+        
     }
 }
